@@ -41,7 +41,9 @@ export default class ImageRequest extends Component {
     return (
       <div>
             {!this.state.loading && (
-                <img className='myimg'src={this.state.ci} alt="" style={{ width: '500px' , height:'20rem'}} />
+                <img className='myimg' src={this.state.ci} alt="" style={{
+                    width: '30rem',
+                    height: '18rem'}} />
             )}
       </div>
     )
