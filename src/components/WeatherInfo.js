@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import WeatherData from './WeatherData'
 
-
-const Api_Key = ""
+const Api_Key = process.env.REACT_APP_WEATHER_KEY
 
 export default class WeatherInfo extends Component {
     constructor(props){
