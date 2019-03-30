@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
+const Api_Key = process.env.REACT_APP_IMAGE_KEY
 
-const Api_Key = ''
 
 export default class ImageRequest extends Component {
     constructor(props){
@@ -41,9 +41,7 @@ export default class ImageRequest extends Component {
     return (
       <div>
             {!this.state.loading && (
-                <img className='myimg' src={this.state.ci} alt="" style={{
-                    width: '30rem',
-                    height: '18rem'}} />
+                <img className='myimg' src={this.state.ci} alt="city" />
             )}
       </div>
     )
