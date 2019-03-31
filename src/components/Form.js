@@ -19,7 +19,12 @@ import WeatherInfo from './WeatherInfo'
  
     getData = e => {
         e.preventDefault();  
+        const valid = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/
+        if(valid.test(this.state.city)){
         this.setState({data:this.state.city, city:''})
+        }else{
+            console.log('type the name of the city')
+        }
     }
 
   render() {
