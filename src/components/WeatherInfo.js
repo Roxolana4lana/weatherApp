@@ -11,7 +11,8 @@ export default class WeatherInfo extends Component {
             weather: '',
             wind: '',
             isLoading:true,
-            city: this.props.city
+            city: this.props.city,
+            myError:''
          }
     }
 
@@ -24,10 +25,16 @@ export default class WeatherInfo extends Component {
                     temp: data.main.temp,
                     weather: data.weather[0].description,
                     isLoading: false,
-                    wind: data.wind.speed
+                    wind: data.wind.speed,
+                    myError: ''
                 }))
                 .catch(err => {
-                    if (err) console.error("Cannot fetch Weather Data from API, ", err)
+                    if (err) {
+                        this.setState({
+                            myError:'Type the correct name of the city in English!!!!!!!'
+                        })
+                        console.error("Cannot fetch Weather Data from API, ", err)
+                    }
                 })
         }
     }
@@ -39,16 +46,23 @@ export default class WeatherInfo extends Component {
         .then(data => this.setState({ temp:data.main.temp,
             weather: data.weather[0].description,
             isLoading:false,
+            myError:'',
             wind: data.wind.speed}))
-         .catch(err => {
-           if (err) console.error("Cannot fetch Weather Data from API, ", err)
-       }) 
+            .catch(err => {
+                if (err) {
+                    this.setState({
+                        myError: 'Type the correct name of the city in English!!!!!!!'
+                    })
+                    console.error("Cannot fetch Weather Data from API, ", err)
+                }
+            }) 
     }
          
   render() {
     return (
         <div className='weather_info'>
             {this.state.isLoading && <h1>Loading...Write the correct name of the city in English :)</h1>}
+            {this.state.myError && <h1>{this.state.myError}</h1>}
             {!this.state.isLoading && (
             <div>
                 <h1> The city is {this.props.city}</h1>
