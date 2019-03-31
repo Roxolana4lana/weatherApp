@@ -62,8 +62,7 @@ export default class WeatherInfo extends Component {
     return (
         <div className='weather_info'>
             {this.state.isLoading && <h1>Loading...Write the correct name of the city in English :)</h1>}
-            {this.state.myError && <h1>{this.state.myError}</h1>}
-            {!this.state.isLoading && (
+            {this.state.myError?<h1>{this.state.myError}</h1>: (
             <div>
                 <h1> The city is {this.props.city}</h1>
                 <WeatherData 
@@ -76,4 +75,3 @@ export default class WeatherInfo extends Component {
     )
   }
 }
-

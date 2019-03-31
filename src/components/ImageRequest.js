@@ -6,7 +6,7 @@ const Api_Key = process.env.REACT_APP_IMAGE_KEY
 export default class ImageRequest extends Component {
     constructor(props){
         super(props)
-       this.state={ci:'', loading:false, city:this.props.ci}
+        this.state = { ci: '', loading: false, city: this.props.ci, myError: ''}
     }
 
     componentDidUpdate (prevProps) {
@@ -16,10 +16,15 @@ export default class ImageRequest extends Component {
                 .then(data => data.json())
                 .then(data => this.setState({
                     ci: data.hits[0].largeImageURL,
-                    loading: false
+                    loading: false,
+                    myError: ''
                 }))
                 .catch(err => {
-                    if (err) console.error("Cannot fetch Weather Data from API, ", err)
+                    if (err) {
+                        this.setState({
+                            myError: 'https://cdn.pixabay.com/photo/2016/06/09/00/06/oops-1444975_960_720.jpg'
+                        })
+                        console.error("Cannot fetch Weather Data from API, ", err)}
                 })
         }
     }
@@ -30,22 +35,25 @@ export default class ImageRequest extends Component {
             .then(data => data.json())
             .then(data => this.setState({
                 ci: data.hits[0].largeImageURL,
-                loading:false
+                loading:false,
+                myError: ''
             }))
             .catch(err => {
-                if (err) console.error("Cannot fetch Weather Data from API, ", err)
+                if (err) {
+                    this.setState({
+                        myError: 'https://cdn.pixabay.com/photo/2016/06/09/00/06/oops-1444975_960_720.jpg' 
+                    })
+                    console.error("Cannot fetch Weather Data from API, ", err)}
             })
     }
 
   render() {
     return (
       <div>
-            {!this.state.loading && (
-                <img className='myimg' src={this.state.ci} alt="city" />
-            )}
+            {this.state.myError ? <img className='myimg' src={this.state.myError} alt="city" /> :
+             <img className='myimg' src={this.state.ci} alt="city" />}
+            
       </div>
     )
   }
 }
-
-
